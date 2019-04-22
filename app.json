@@ -1,0 +1,29 @@
+{
+  "expo": {
+    "name": "Quiz Flashcards App",
+    "slug": "Quiz-flashcards",
+    "privacy": "public",
+    "sdkVersion": "32.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "splash": {
+      "image": "./assets/cardstack.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#173F5F"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}
