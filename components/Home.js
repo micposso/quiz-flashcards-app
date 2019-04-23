@@ -24,7 +24,7 @@ class Home extends React.Component {
     const { decks } = this.props;
     return (
       <Container>
-        <Content padder>
+        <Content padder style={{ backgroundColor: colors.allScreensBackgroundColor }}>
           {decks &&
             Object.keys(decks).map(id => (
               <TouchableOpacity
@@ -34,15 +34,16 @@ class Home extends React.Component {
                 <Card bordered>
                   <CardItem
                     header
-                    style={{ justifyContent: "center", backgroundColor: colors.contentBackgroundColor }}
+                    style={{ justifyContent: "center", flexDirection: "column", backgroundColor: colors.contentBackgroundColor }}
                   >
                     <Text>{decks[id].title}</Text>
+                      <CardItem style={{ justifyContent: "center", marginTop: 10, backgroundColor: colors.contentBackgroundColor }}>
+                        <Body style={{ alignItems: "center", padding: 10, borderColor: "#1678a5", borderWidth: 1, borderStyle: "solid"}} rounded>
+                          <Text>{decks[id].questions.length} cards</Text>
+                        </Body>
+                    </CardItem>
                   </CardItem>
-                  <CardItem style={{ justifyContent: "center", backgroundColor: colors.contentBackgroundColor }}>
-                    <Body style={{ alignItems: "center" }}>
-                      <Text>{decks[id].questions.length} cards</Text>
-                    </Body>
-                  </CardItem>
+
                 </Card>
               </TouchableOpacity>
             ))}

@@ -1,8 +1,9 @@
 export const ADD_CARD = "ADD_CARD";
 
-export function addCard(deck) {
+export function addCard(deckId, card) {
   return {
     type: ADD_CARD,
-    deck
+    deckId,
+    card
   };
 }

@@ -5,6 +5,32 @@ import { connect } from "react-redux";
 import { handleDeleteDeck } from "../actions/shared";
 import { colors } from "../utils/colors";
 
+const styles = StyleSheet.create({
+  container: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: colors.allScreensBackgroundColor
+  },
+  deckTitle: {
+    fontSize: 35,
+    fontWeight: "bold",
+    marginBottom: 40
+  },
+  deckCardCount: {
+    fontSize: 30,
+    marginBottom: 40
+  },
+  button: {
+    margin: 20,
+  },
+  alertbtn: {
+    margin: 20,
+    color: 'red',
+    borderStyle: 'solid',
+    borderWidth: 1,
+  }
+});
+
 class Deck extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
@@ -50,28 +76,31 @@ class Deck extends React.Component {
             {deck.questions.length} cards
           </Text>
           <Button
-            style={styles.btn}
+            style={[styles.button, { backgroundColor: colors.headerColor }]}
             onPress={() => this.onAddCardPress(deck.id)}
             bordered
+            rounded
             block
           >
-            <Text style={{ color: colors.darkTextColor }}>Add Card</Text>
+            <Text>Add Card</Text>
           </Button>
           <Button
-            style={[styles.btn, { backgroundColor: colors.darkButtonColor }]}
+            style={[styles.button, { backgroundColor: colors.headerColor }]}
             onPress={() => this.onStartQuizPress(deck.id)}
             block
+            rounded
           >
             <Text>Start Quiz</Text>
           </Button>
           <Button
-            style={styles.btn}
+            style={styles.alertbtn}
             onPress={() => this.onDeleteDeckPress(deck.id)}
             transparent
+            rounded
             danger
             block
           >
-            <Text>Delete Deck</Text>
+            <Text>Remove Deck</Text>
           </Button>
         </Container>
       );
@@ -101,22 +130,4 @@ export default connect(
   mapDispatchToProps
 )(Deck);
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.allScreensBackgroundColor
-  },
-  deckTitle: {
-    fontSize: 35,
-    fontWeight: "bold",
-    marginBottom: 40
-  },
-  deckCardCount: {
-    fontSize: 30,
-    marginBottom: 40
-  },
-  btn: {
-    margin: 20
-  }
-});
+

@@ -6,6 +6,7 @@ import { Font } from "expo";
 import { Container, Spinner } from 'native-base';
 import store from "./reducers/store";
 import { setLocalNotification } from "./utils/helper";
+import { colors } from "./utils/colors";
 
 export default class App extends React.Component {
   state = {
@@ -30,8 +31,8 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isAppReady) {
       return (
-        <Container>
-          <Spinner color="blue" />
+        <Container style={{ felx: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.allScreensBackgroundColor }}>
+          <Spinner color="white" />
         </Container>
       );
     }

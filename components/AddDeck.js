@@ -54,6 +54,7 @@ class AddDeck extends React.Component {
             full
           >
             <Button
+              rounded
               style={[styles.btn]}
               onPress={() => this.onAddCreateDeckPress()}
             >

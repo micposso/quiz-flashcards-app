@@ -5,6 +5,7 @@ import Stack from "./StackNavigation";
 import { Constants } from "expo";
 import { connect } from "react-redux";
 import { handleGetAllDecks } from "../actions/shared";
+import { colors } from "../utils/colors";
 
 class Main extends React.Component {
   componentDidMount() {
@@ -14,7 +15,7 @@ class Main extends React.Component {
   render() {
     return (
       <Container>
-        <View style={{ height: Constants.statusBarHeight }}>
+        <View style={{ height: Constants.statusBarHeight, backgroundColor: colors.allScreensBackgroundColor }}>
           <StatusBar />
         </View>
         <Stack />
