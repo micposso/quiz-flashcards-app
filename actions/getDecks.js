@@ -1,8 +1,8 @@
 export const GET_DECKS = "GET_DECKS";
 
-export function getDecks(decks) {
+export function getAllDecks(decks) {
   return {
-    type: ET_DECKS,
+    type: GET_DECKS,
     decks
   };
 }

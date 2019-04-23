@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Container, Content, Text, Card, CardItem, Body } from "native-base";
 import { connect } from "react-redux";
 import { colors } from "../utils/colors";
@@ -24,7 +24,7 @@ class Home extends React.Component {
     const { decks } = this.props;
     return (
       <Container>
-        <Content style={styles.content} padder>
+        <Content padder>
           {decks &&
             Object.keys(decks).map(id => (
               <TouchableOpacity

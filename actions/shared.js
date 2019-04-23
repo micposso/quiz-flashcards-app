@@ -1,5 +1,8 @@
 import { getDecks, saveDeckTitle, saveCardToDeck, removeDeck  } from "../utils/api";
-import { getDecks } from './actions/getDecks'
+import { getAllDecks } from './getDecks'
+import { addDeck } from './addDeck'
+import { addCard } from './addCard'
+import { resetDeck } from './resetDeck'
 
 export function handleGetAllDecks() {
   return dispatch => {
@@ -20,7 +23,7 @@ export function handleAddDecks(deckTitle) {
 export function handleAddCardToDeck(deckId, card) {
   return dispatch => {
     return saveCardToDeck(deckId, card).then(() => {
-      dispatch(addCardToDeck(deckId, card));
+      dispatch(addCard(deckId, card));
     });
   };
 }
@@ -28,7 +31,7 @@ export function handleAddCardToDeck(deckId, card) {
 export function handleDeleteDeck(deckId) {
   return dispatch => {
     return removeDeck(deckId).then(() => {
-      dispatch(deleteDeck(deckId));
+      dispatch(resetDeck(deckId));
     });
   };
 }

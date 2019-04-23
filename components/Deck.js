@@ -2,7 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Container, Button, Text } from "native-base";
 import { connect } from "react-redux";
-import { handleDeleteDeck } from "../actions/decks";
+import { handleDeleteDeck } from "../actions/shared";
 import { colors } from "../utils/colors";
 
 class Deck extends React.Component {

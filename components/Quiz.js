@@ -2,12 +2,9 @@ import React from "react";
 import { StyleSheet, Animated, Dimensions } from "react-native";
 import { Container, Button, Text, View } from "native-base";
 import { connect } from "react-redux";
-import { handleDeleteDeck } from "../actions/decks";
-import {
-  clearLocalNotification,
-  setLocalNotification,
-  colors
-} from "../utils/helper";
+import { handleDeleteDeck } from "../actions/shared";
+import { clearLocalNotification, setLocalNotification } from "../utils/helper";
+import { colors } from '../utils/colors'
 
 class Quiz extends React.Component {
   state = {
@@ -118,7 +115,7 @@ class Quiz extends React.Component {
             style={[
               frontAnimatedStyle,
               styles.questionView,
-              { opacity: this.frontOpacity, borderRadius: 30 }
+              { opacity: this.frontOpacity }
             ]}
           >
             <Text style={styles.questionText}>
@@ -130,7 +127,7 @@ class Quiz extends React.Component {
               backAnimatedStyle,
               styles.questionView,
               styles.backView,
-              { opacity: this.backOpacity, borderRadius: 30 }
+              { opacity: this.backOpacity }
             ]}
           >
             <Text style={styles.questionText}>

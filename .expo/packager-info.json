@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 16176,
+  "expoServerNgrokUrl": "https://pa-jvr.micposso.quiz-flashcards-app.exp.direct",
+  "packagerNgrokUrl": "https://packager.pa-jvr.micposso.quiz-flashcards-app.exp.direct",
+  "ngrokPid": 20344,
+  "webpackServerPort": null
 }

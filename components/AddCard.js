@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     marginRight: 20,
     backgroundColor: '#ffffff',
   },
-  btn: {
+  button: {
     margin: 30,
     backgroundColor: '#ffc107',
   }
@@ -60,7 +60,7 @@ class AddCard extends React.Component {
             />
           </Item>
         </Form>
-        <Button style={styles.btn} onPress={() => this.onAddCardPress()} block>
+        <Button style={styles.button} onPress={() => this.onAddCardPress()} block>
           <Text>Submit</Text>
         </Button>
       </Container>

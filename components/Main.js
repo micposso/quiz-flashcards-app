@@ -4,7 +4,7 @@ import { Container } from "native-base";
 import Stack from "./StackNavigation";
 import { Constants } from "expo";
 import { connect } from "react-redux";
-import { handleGetAllDecks } from "../actions/decks";
+import { handleGetAllDecks } from "../actions/shared";
 
 class Main extends React.Component {
   componentDidMount() {

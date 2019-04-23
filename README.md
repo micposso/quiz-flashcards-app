@@ -1,4 +1,4 @@
-# Mobile Flashcards
+# Quiz Flashcards
 This React Native project using Redux pattern
 
 ## Installation Instructions

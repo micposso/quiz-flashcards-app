@@ -2,9 +2,8 @@ import React from "react";
 import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
 import { Container, Button, Text, Item, Input, Form } from "native-base";
 import { connect } from "react-redux";
-import { handleAddDecks, resetNewDeckId } from "../actions/decks";
-
-
+import { handleAddDecks, resetNewDeckId } from "../actions/shared";
+import { colors } from "../utils/colors";
 
 class AddDeck extends React.Component {
   state = {
@@ -19,7 +18,6 @@ class AddDeck extends React.Component {
   };
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.newDeckId);
     if (nextProps.newDeckId !== this.props.newDeckId) {
       this.props.navigation.navigate("Deck", {
         deckId: nextProps.newDeckId,
@@ -37,7 +35,7 @@ class AddDeck extends React.Component {
             What is the title of your new deck?
           </Text>
           <Form style={{ alignSelf: "stretch" }}>
-            <Item style={{ backgroundColor: "white" }} rounded>
+            <Item style={{ backgroundColor: "white" }}>
               <Input
                 placeholder="Deck Title"
                 value={this.state.deckTitle}
