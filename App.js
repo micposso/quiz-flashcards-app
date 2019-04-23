@@ -3,7 +3,7 @@ import Main from "./components/Main";
 import { Provider } from "react-redux";
 import { Ionicons } from "@expo/vector-icons";
 import { Font } from "expo";
-import { Container, Spinner } from 'native-base';
+import { Container, Spinner } from "native-base";
 import store from "./reducers/store";
 import { setLocalNotification } from "./utils/helper";
 import { colors } from "./utils/colors";
@@ -15,7 +15,7 @@ export default class App extends React.Component {
 
   async componentWillMount() {
     await Font.loadAsync({
-      Roboto: require("native-base/Fonts/Roboto.ttf"),
+      Foundation: require("native-base/Fonts/Foundation.ttf"),
       Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf"),
       ...Ionicons.font
     });
@@ -31,7 +31,14 @@ export default class App extends React.Component {
   render() {
     if (!this.state.isAppReady) {
       return (
-        <Container style={{ felx: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.allScreensBackgroundColor }}>
+        <Container
+          style={{
+            felx: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: colors.allScreensBackgroundColor
+          }}
+        >
           <Spinner color="white" />
         </Container>
       );
