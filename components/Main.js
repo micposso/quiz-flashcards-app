@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StatusBar } from "react-native";
 import { Container } from "native-base";
+// import { Ionicons } from "@expo/vector-icons";
 import Stack from "./StackNavigation";
 import { Constants } from "expo";
 import { connect } from "react-redux";
@@ -32,7 +33,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Main);
+export default connect(null, mapDispatchToProps)(Main);
