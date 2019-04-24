@@ -1,40 +1,16 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Container, Button, Text } from "native-base";
+import { ThemeProvider, Badge, Text, Button } from 'react-native-elements';
+import { Container } from "native-base";
 import { connect } from "react-redux";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { handleDeleteDeck } from "../actions/shared";
 import { colors } from "../utils/colors";
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.allScreensBackgroundColor
-  },
-  deckTitle: {
-    fontSize: 35,
-    fontWeight: "bold",
-    marginBottom: 40
-  },
-  deckCardCount: {
-    fontSize: 30,
-    marginBottom: 40
-  },
-  button: {
-    margin: 20,
-  },
-  alertbtn: {
-    margin: 20,
-    color: 'red',
-    borderStyle: 'solid',
-    borderWidth: 1,
-  }
-});
 
 class Deck extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const { title } = navigation.state.params;
-
+    
     return {
       title: title,
       headerTintColor: "white",
@@ -68,40 +44,38 @@ class Deck extends React.Component {
 
   render() {
     const { deck } = this.props;
+    const numberCards = deck.questions.length;
+    const DeckScreen = {
+      Button: {
+        raised: true,
+      },
+      Badge: {
+        status: 'warning',
+      }
+    }
+
     if (deck) {
       return (
-        <Container style={styles.container}>
-          <Text style={styles.deckTitle}>{deck.title}</Text>
-          <Text style={styles.deckCardCount}>
-            {deck.questions.length} cards
-          </Text>
-          <Button
-            style={[styles.button, { backgroundColor: colors.headerColor }]}
-            onPress={() => this.onAddCardPress(deck.id)}
-            bordered
-            rounded
-            block
-          >
-            <Text>Add Card</Text>
-          </Button>
-          <Button
-            style={[styles.button, { backgroundColor: colors.headerColor }]}
-            onPress={() => this.onStartQuizPress(deck.id)}
-            block
-            rounded
-          >
-            <Text>Start Quiz</Text>
-          </Button>
-          <Button
-            style={styles.alertbtn}
-            onPress={() => this.onDeleteDeckPress(deck.id)}
-            transparent
-            rounded
-            danger
-            block
-          >
-            <Text>Remove Deck</Text>
-          </Button>
+        <Container>
+          <ThemeProvider theme={DeckScreen}>
+            <Badge value={numberCards}/><Text h3>{deck.title}</Text>
+            <Text>Cards</Text>
+            <Button 
+              title="Add Card" 
+              onPress={() => this.onAddCardPress(deck.id)} 
+              icon={<Ionicons name="ios-add-circle-outline" color="white" />}
+            />
+            <Button 
+              title="Start Quiz" 
+              onPress={() => this.onStartQuizPress(deck.id)} 
+              icon={<MaterialCommunityIcons name="test-tube-empty" color="white" />}
+              />
+            <Button 
+              title="Remove Deck" 
+              onPress={() => this.onDeleteDeckPress(deck.id)} 
+              icon={<Ionicons name="ios-remove-circle-outline" color="white" />}
+              />
+          </ThemeProvider>
         </Container>
       );
     } else {
@@ -125,9 +99,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Deck);
+export default connect(mapStateToProps, mapDispatchToProps)(Deck);
 
 

@@ -1,6 +1,5 @@
 import React from "react";
 import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
-// import { createMaterialTopTabNavigator } from 'react-navigation';
 import Home from './Home';
 import AddDeck from './AddDeck';
 import { Ionicons } from "@expo/vector-icons";
