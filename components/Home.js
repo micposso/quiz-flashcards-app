@@ -1,6 +1,7 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { Container, Content, Text, Card, CardItem, Body } from "native-base";
+import { ThemeProvider, Card, Text, Badge } from 'react-native-elements';
+import { Container, Content } from "native-base";
 import { connect } from "react-redux";
 import { colors } from "../utils/colors";
 
@@ -22,32 +23,41 @@ class Home extends React.Component {
 
   render() {
     const { decks } = this.props;
+    const homeScreen = {
+      Card: {
+        title: 'STUDY DECK',
+        containerStyle: {
+          borderColor: '#ccc',
+          borderRadius: 20,
+        }
+      },
+      Badge: {
+        badgeStyle: {height: 25, width: 25},
+      }
+    }
     return (
       <Container>
-        <Content padder style={{ backgroundColor: colors.allScreensBackgroundColor }}>
-          {decks &&
-            Object.keys(decks).map(id => (
-              <TouchableOpacity
-                key={id}
-                onPress={() => this.onDeckCardPress(decks[id])}
-              >
-                <Card bordered>
-                  <CardItem
-                    header
-                    style={{ justifyContent: "center", flexDirection: "column", backgroundColor: colors.contentBackgroundColor }}
-                  >
-                    <Text>{decks[id].title}</Text>
-                      <CardItem style={{ justifyContent: "center", marginTop: 10, backgroundColor: colors.contentBackgroundColor }}>
-                        <Body style={{ alignItems: "center", padding: 10, borderColor: "#1678a5", borderWidth: 1, borderStyle: "solid"}} rounded>
-                          <Text>{decks[id].questions.length} cards</Text>
-                        </Body>
-                    </CardItem>
-                  </CardItem>
+        <ThemeProvider theme={homeScreen}>
+          <Content padder style={{ backgroundColor: colors.allScreensBackgroundColor }}>
+            {decks &&
+              Object.keys(decks).map(id => {
+                
+                const numberCards = decks[id].questions.length;
 
-                </Card>
-              </TouchableOpacity>
-            ))}
-        </Content>
+                return (<TouchableOpacity
+                  key={id}
+                  onPress={() => this.onDeckCardPress(decks[id])}
+                >
+                  <Card>
+                      <Text h1>{decks[id].title}</Text>
+                      <Badge value={numberCards}/>
+                  </Card>
+                </TouchableOpacity>)
+              
+              
+              })}
+          </Content>
+        </ThemeProvider>
       </Container>
     );
   }

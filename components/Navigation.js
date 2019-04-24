@@ -1,36 +1,31 @@
-import { createMaterialTopTabNavigator } from "react-navigation";
-import Home from "./Home";
-import AddDeck from "./AddDeck";
-import { colors } from "../utils/colors";
+import React from "react";
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
+// import { createMaterialTopTabNavigator } from 'react-navigation';
+import Home from './Home';
+import AddDeck from './AddDeck';
+import { Ionicons } from "@expo/vector-icons";
+import { colors } from '../utils/colors';
 
-const Navigation = createMaterialTopTabNavigator(
-  {
+const TabNavigator = createMaterialBottomTabNavigator ({
     Home: {
-      screen: Home,
-      navigationOptions: {
-        tabBarLabel: "Decks"
-      }
+        screen: Home,
+        navigationOptions: {
+            title: "Decks",
+            tabBarIcon: () => <Ionicons name="md-home" size={20} color="white" />,
+        },
     },
     AddDeck: {
-      screen: AddDeck,
-      navigationOptions: {
-        tabBarLabel: "+Deck"
-      }
+        screen: AddDeck,
+        navigationOptions: {
+            title: "Add Deck",
+            tabBarIcon: () => <Ionicons name="md-paper" size={20} color="white" />,
+        }
     }
-  },
-  {
-    tabBarOptions: {
-      labelStyle: {
-        fontWeight: "bold"
-      },
-      style: {
-        backgroundColor: colors.headerColor
-      }
-    }
-  }
-);
-Navigation.navigationOptions = {
-  header: null
+})
+TabNavigator.navigationOptions = {
+    // Hide the header from AppNavigator stack
+    header: null,
+    
 };
 
-export default Navigation;
+export default TabNavigator;
