@@ -3,7 +3,7 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 import Home from './Home';
 import AddDeck from './AddDeck';
 import { Ionicons } from "@expo/vector-icons";
-import { colors } from '../utils/colors';
+import { appStyles, colors } from "../utils/Styles";
 
 const TabNavigator = createMaterialBottomTabNavigator ({
     Home: {

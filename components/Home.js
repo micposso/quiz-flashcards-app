@@ -3,7 +3,7 @@ import { TouchableOpacity } from "react-native";
 import { ThemeProvider, Card, Text, Badge } from 'react-native-elements';
 import { Container, Content } from "native-base";
 import { connect } from "react-redux";
-import { colors } from "../utils/colors";
+import { appStyles, colors } from "../utils/Styles";
 
 class Home extends React.Component {
   state = {
@@ -49,8 +49,8 @@ class Home extends React.Component {
                   onPress={() => this.onDeckCardPress(decks[id])}
                 >
                   <Card>
-                      <Text h1>{decks[id].title}</Text>
-                      <Badge value={numberCards}/>
+                    <Text h1>{decks[id].title}</Text>
+                    <Badge value={numberCards}/>
                   </Card>
                 </TouchableOpacity>)
               

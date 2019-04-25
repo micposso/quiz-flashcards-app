@@ -1,10 +1,10 @@
 import React from "react";
-import { ThemeProvider, Badge, Text, Button } from 'react-native-elements';
-import { Container } from "native-base";
+import { ThemeProvider, Badge, Text, Button, Card } from 'react-native-elements';
+import { Container, View } from "native-base";
 import { connect } from "react-redux";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { handleDeleteDeck } from "../actions/shared";
-import { colors } from "../utils/colors";
+import { appStyles, colors } from "../utils/Styles";
 
 
 class Deck extends React.Component {
@@ -48,33 +48,54 @@ class Deck extends React.Component {
     const DeckScreen = {
       Button: {
         raised: true,
+        type: 'outline',
+        containerStyle: { marginBottom: 10 }
       },
       Badge: {
         status: 'warning',
+      },
+      Card: {
+        containerStyle: {
+          borderColor: '#ccc',
+          borderRadius: 20,
+        }
       }
     }
 
     if (deck) {
       return (
-        <Container>
+        <Container style={{ padding: 20 }}>
           <ThemeProvider theme={DeckScreen}>
-            <Badge value={numberCards}/><Text h3>{deck.title}</Text>
-            <Text>Cards</Text>
-            <Button 
-              title="Add Card" 
-              onPress={() => this.onAddCardPress(deck.id)} 
-              icon={<Ionicons name="ios-add-circle-outline" color="white" />}
-            />
-            <Button 
-              title="Start Quiz" 
-              onPress={() => this.onStartQuizPress(deck.id)} 
-              icon={<MaterialCommunityIcons name="test-tube-empty" color="white" />}
-              />
-            <Button 
-              title="Remove Deck" 
-              onPress={() => this.onDeleteDeckPress(deck.id)} 
-              icon={<Ionicons name="ios-remove-circle-outline" color="white" />}
-              />
+            <Card>
+              <View style={{ flex: 1, flexDirection: 'row', margin: 5, alignItems: 'center', justifyItems: 'center' }}>
+                <Badge value={numberCards}/><Text h3>{deck.title}</Text>
+              </View>
+              <Text>Cards</Text>
+              <View style={{ margin: 10 }}>
+                
+                <Button 
+                  title="Add Card" 
+                  onPress={() => this.onAddCardPress(deck.id)} 
+                  icon={<Ionicons style={ appStyles.AppIcons } name="ios-add-circle-outline" />}
+                />
+              </View>
+              <View style={{ margin: 10 }}>
+
+              <Button 
+                title="Start Quiz" 
+                onPress={() => this.onStartQuizPress(deck.id)} 
+                icon={<MaterialCommunityIcons style={ appStyles.AppIcons } name="test-tube-empty" />}
+                />
+               </View>
+               <View style={{ margin: 10 }}>
+ 
+              <Button 
+                title="Remove Deck" 
+                onPress={() => this.onDeleteDeckPress(deck.id)} 
+                icon={<Ionicons style={ appStyles.AppIcons } name="ios-remove-circle-outline" />}
+                />
+                </View>
+            </Card>
           </ThemeProvider>
         </Container>
       );

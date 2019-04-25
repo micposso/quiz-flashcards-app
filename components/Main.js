@@ -1,12 +1,11 @@
 import React from "react";
 import { View, StatusBar } from "react-native";
 import { Container } from "native-base";
-// import { Ionicons } from "@expo/vector-icons";
 import Stack from "./StackNavigation";
 import { Constants } from "expo";
 import { connect } from "react-redux";
 import { handleGetAllDecks } from "../actions/shared";
-import { colors } from "../utils/colors";
+import { appStyles, colors } from "../utils/Styles";
 
 class Main extends React.Component {
   componentDidMount() {

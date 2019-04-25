@@ -4,7 +4,7 @@ import { Container, Button, Text, View } from "native-base";
 import { connect } from "react-redux";
 import { handleDeleteDeck } from "../actions/shared";
 import { clearLocalNotification, setLocalNotification } from "../utils/helper";
-import { colors } from '../utils/colors'
+import { appStyles, colors } from "../utils/Styles";
 
 class Quiz extends React.Component {
   state = {

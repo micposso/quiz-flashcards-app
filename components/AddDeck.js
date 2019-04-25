@@ -3,7 +3,7 @@ import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
 import { Container, Button, Text, Item, Input, Form } from "native-base";
 import { connect } from "react-redux";
 import { handleAddDecks, resetNewDeckId } from "../actions/shared";
-import { colors } from "../utils/colors";
+import { appStyles, colors } from "../utils/Styles";
 
 class AddDeck extends React.Component {
   state = {

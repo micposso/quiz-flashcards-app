@@ -3,7 +3,7 @@ import Navigation from "./Navigation";
 import Deck from "./Deck";
 import AddCard from "./AddCard";
 import Quiz from "./Quiz";
-import { colors } from "../utils/colors";
+import { appStyles, colors } from "../utils/Styles";
 
 const Stack = createStackNavigator({
   Main: {

@@ -3,13 +3,13 @@ import { StyleSheet } from "react-native";
 import { Container, Button, Text, Item, Input, Form } from "native-base";
 import { connect } from "react-redux";
 import { handleAddCardToDeck } from "../actions/shared";
-import { colors } from "../utils/colors";
+import { AppStyles, colors } from "../utils/Styles";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor:colors.allScreensBackgroundColor,
+    backgroundColor: colors.allScreensBackgroundColor,
   },
   cardInputField: {
     marginTop: 30,

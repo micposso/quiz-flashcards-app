@@ -6,7 +6,7 @@ import { Font } from "expo";
 import { Container, Spinner } from "native-base";
 import store from "./reducers/store";
 import { setLocalNotification } from "./utils/helper";
-import { colors } from "./utils/colors";
+import { appStyles, colors } from "./utils/Styles";
 
 export default class App extends React.Component {
   state = {
