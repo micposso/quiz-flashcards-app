@@ -7,6 +7,21 @@ import { handleDeleteDeck } from "../actions/shared";
 import { clearLocalNotification, setLocalNotification } from "../utils/helper";
 import { appStyles, colors } from "../utils/Styles";
 
+const QuizScreen = {
+  Button: {
+    raised: true,
+    type: "outline",
+    containerStyle: { marginTop: 15 }
+  },
+  Card: {
+    containerStyle: {
+      borderColor: "#ccc",
+      borderRadius: 20,
+    }
+  },
+  Input: {}
+};
+
 class Quiz extends React.Component {
   state = {
     questionIndex: 0,
@@ -86,23 +101,7 @@ class Quiz extends React.Component {
 
   render() {
     const { questions } = this.props.deck;
-    
-    const Quiz = {
-      Button: {
-        raised: true,
-        type: "outline",
-        containerStyle: { marginTop: 15 }
-      },
-      Card: {
-        containerStyle: {
-          borderColor: "#ccc",
-          borderRadius: 20,
-          height: 200
-        }
-      },
-      Input: {}
-    };
-
+  
     if (this.state.quizCompleted) {
       this.setupNotificaitonForTomorrow();
       return this.renderWhenQuizCompleted();
@@ -125,97 +124,77 @@ class Quiz extends React.Component {
 
     return (
       <Container>
-        <ThemeProvider theme={Quiz}>
+        <ThemeProvider theme={QuizScreen}>
           <Card>
             <View>
               <Badge value={questionIndex + 1} />
               <Text>/</Text>
               <Badge value={questions.length} />
             </View>
-            <Animated.View
-              style={[
-                frontAnimatedStyle,
-                styles.questionView,
-                { opacity: this.frontOpacity }
-              ]}
-            >
-              <Text style={styles.questionText}>
-                {questions[questionIndex].question}
-              </Text>
-            </Animated.View>
-            <Animated.View
-              style={[
-                backAnimatedStyle,
-                styles.questionView,
-                styles.backView,
-                { opacity: this.backOpacity }
-              ]}
-            >
-              <Text style={styles.questionText}>
-                {questions[questionIndex].answer}
-              </Text>
-            </Animated.View>
+            <Card>
+              <Animated.View
+                style={[
+                  frontAnimatedStyle,
+                  { opacity: this.frontOpacity }
+                ]}
+              >
+                <Text h3>
+                  {questions[questionIndex].question}
+                </Text>
+              </Animated.View>
+
+              <Animated.View
+                style={[
+                  backAnimatedStyle,
+                  { opacity: this.backOpacity }
+                ]}
+              >
+                <Text h3>
+                  {questions[questionIndex].answer}
+                </Text>
+              </Animated.View>
+            </Card>
+
             <Button title={this.state.flipButtonText} onPress={() => this.flipCard()} />
             <Button title="Correct" onPress={() => this.markQuestion(true)} />
             <Button title="Incorrect" onPress={() => this.markQuestion(false)} />
           </Card>
-        </ThemeProvider >
+        </ThemeProvider>
       </Container>
     );
   }
 
   renderIfQuestionDoesNotExists() {
     return (
-      <Container style={styles.noQuizcontainer}>
-        <View>
-          <Text
-            style={{
-              fontSize: 20,
-              alignSelf: "center",
-              marginLeft: 20,
-              marginRight: 20,
-              color: colors.mainTextColor
-            }}
-          >
-            Sorry, you cannot take a quiz because there are no cards in the
-            deck.
-          </Text>
-        </View>
+      <Container>
+        <ThemeProvider theme={QuizScreen}>
+          <Card>
+            <Text h3>
+              You can't take this Quiz. Please add cards to the deck. 
+            </Text>
+          </Card>
+          </ThemeProvider>
       </Container>
     );
   }
 
   renderWhenQuizCompleted() {
     return (
-      <Container style={styles.noQuizcontainer}>
-        <View>
-          <Text style={{ fontSize: 20, alignSelf: "center" }}>
-            Quiz Completed
-          </Text>
-          <Text style={{ fontSize: 20, alignSelf: "center" }}>
-            You have answered{" "}
-            {Math.round(
-              (this.state.correctCount / this.props.deck.questions.length) * 100
-            )}
-            % correct
-          </Text>
-          <Button
-            block
-            rounded
-            style={styles.btnQuizEnded}
-            onPress={() => this.restartQuiz()}
-          >
-            <Text>Restart Quiz</Text>
-          </Button>
-          <Button
-            block
-            rounded
-            style={styles.btnQuizEnded}
-            onPress={() => this.props.navigation.goBack()}
-          >
-            <Text>Back to Deck</Text>
-          </Button>
-        </View>
+      <Container>
+        <ThemeProvider theme={QuizScreen}>
+          <Card>
+            <Text h3>Quiz Completed</Text>
+            <Text h3>
+              You have answered{" "}
+              {Math.round(
+                (this.state.correctCount / this.props.deck.questions.length) * 100
+              )}
+              % correct
+            </Text>
+            <Button title="Restart Quiz" onPress={() => this.restartQuiz()} />
+            <Button title="Go Back" onPress={() => this.props.navigation.goBack()} />
+          </Card>
+        </ThemeProvider>
       </Container>
     );
   }
@@ -236,50 +215,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Quiz);
+export default connect(mapStateToProps, mapDispatchToProps)(Quiz);
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.screensBg
-  },
-  noQuizcontainer: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.screensBg
-  },
-  questionView: {
-    width: Dimensions.get("window").width - 20,
-    height: 300,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.quizCardColor,
-    backfaceVisibility: "hidden",
-    marginLeft: 10
-  },
-  backView: {
-    position: "absolute",
-    top: 0
-  },
-  btnAnswer: {
-    margin: 20
-  },
-  questionCounterText: {
-    fontSize: 20,
-    marginLeft: 20
-  },
-  questionText: {
-    fontSize: 25,
-    marginLeft: 10,
-    marginRight: 10
-  },
-  btn: {
-    marginTop: 50
-  },
-  btnQuizEnded: {
-    margin: 20,
-    backgroundColor: colors.darkButtonColor
-  }
-});
+
