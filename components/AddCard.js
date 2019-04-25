@@ -1,27 +1,11 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Container, Button, Text, Item, Input, Form } from "native-base";
+import { Container} from "native-base";
+import { ThemeProvider, Card, Input, Button, Text } from "react-native-elements";
 import { connect } from "react-redux";
 import { handleAddCardToDeck } from "../actions/shared";
-import { AppStyles, colors } from "../utils/Styles";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: colors.allScreensBackgroundColor,
-  },
-  cardInputField: {
-    marginTop: 30,
-    marginLeft: 20,
-    marginRight: 20,
-    backgroundColor: "white",
-  },
-  button: {
-    margin: 30,
-    backgroundColor: colors.contentBackgroundColor,
-  }
-});
+import { Ionicons } from "@expo/vector-icons";
+import { appStyles, colors } from "../utils/Styles";
 
 class AddCard extends React.Component {
   onAddCardPress() {
@@ -44,27 +28,52 @@ class AddCard extends React.Component {
   };
 
   render() {
+    const AddCard = {
+      Button: {
+        raised: true,
+        type: "outline",
+        containerStyle: { marginTop: 15 }
+      },
+      Card: {
+        containerStyle: {
+          borderColor: "#ccc",
+          borderRadius: 20,
+          height: 200
+        }
+      },
+      Input: {}
+    };
     return (
-      <Container style={styles.container}>
-        <Form style={{ alignSelf: "stretch" }}>
-          <Item style={styles.cardInputField}>
+      <Container>
+        <ThemeProvider theme={AddCard}>
+          <Card style={{ alignSelf: "stretch" }}>
             <Input
-              placeholder="Question"
+              placeholder="Type Question"
               onChangeText={this.handleChange("question")}
+              leftIcon={
+                <Ionicons
+                  style={appStyles.AppIcons}
+                  name="ios-add-circle-outline"
+                />
+              }
             />
-          </Item>
 
-          <Item style={styles.cardInputField}>
             <Input
-              rounded
-              placeholder="Answer"
+              placeholder="Type Answer"
               onChangeText={this.handleChange("answer")}
+              leftIcon={
+                <Ionicons
+                  style={appStyles.AppIcons}
+                  name="ios-add-circle-outline"
+                />
+              }
             />
-          </Item>
-        </Form>
-        <Button style={styles.button} onPress={() => this.onAddCardPress()} block rounded>
-          <Text>Submit</Text>
-        </Button>
+            <Button
+            title="Submit"
+            onPress={() => this.onAddCardPress()}
+          />
+          </Card>
+        </ThemeProvider>
       </Container>
     );
   }
@@ -78,6 +87,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(null, mapDispatchToProps)(AddCard);
-
-
+export default connect(
+  null,
+  mapDispatchToProps
+)(AddCard);
