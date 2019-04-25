@@ -6,6 +6,12 @@ export const appStyles = StyleSheet.create({
       width: 15, 
       color: '#1678a5',
     },
+    AppContainer: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: '#1678a5'
+    }
 
 });
 

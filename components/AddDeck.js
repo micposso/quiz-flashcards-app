@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
-import { Container, Button, Text, Item, Input, Form } from "native-base";
+import { Container } from "native-base";
+import { ThemeProvider, Card, Input, Button, Text } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { handleAddDecks, resetNewDeckId } from "../actions/shared";
 import { appStyles, colors } from "../utils/Styles";
@@ -28,40 +30,43 @@ class AddDeck extends React.Component {
   }
 
   render() {
+    const AddDeck = {
+      Button: {
+        raised: true,
+        type: "outline",
+        containerStyle: { marginTop: 15 }
+      },
+      Card: {
+        containerStyle: {
+          borderColor: "#ccc",
+          borderRadius: 20,
+          height: 200
+        }
+      },
+      Input: {}
+    };
     return (
-      <Container style={styles.container}>
-        <KeyboardAvoidingView behavior="padding">
-          <Text style={[styles.selfAlign, styles.text1]}>
-            What is the title of your new deck?
-          </Text>
-          <Form style={{ alignSelf: "stretch" }}>
-            <Item style={{ backgroundColor: "white" }}>
-              <Input
-                placeholder="Deck Title"
-                value={this.state.deckTitle}
-                onChangeText={this.handleChange("deckTitle")}
-              />
-            </Item>
-          </Form>
+      <Container>
+        <ThemeProvider theme={AddDeck}>
+          <KeyboardAvoidingView behavior="padding">
+            <Card>
+              <Text h3>What is the title of your new deck?</Text>
+                  <Input
+                    placeholder="Deck Title"
+                    leftIcon={
+                      <Ionicons
+                        style={appStyles.AppIcons}
+                        name="ios-add-circle-outline"
+                      />
+                    }
+                    value={this.state.deckTitle}
+                    onChangeText={this.handleChange("deckTitle")}
+                  />
 
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              alignSelf: "stretch",
-              justifyContent: "center"
-            }}
-            full
-          >
-            <Button
-              rounded
-              style={[styles.btn]}
-              onPress={() => this.onAddCreateDeckPress()}
-            >
-              <Text>Create Deck</Text>
-            </Button>
-          </View>
-        </KeyboardAvoidingView>
+                <Button title="Create Deck" onPress={() => this.onAddCreateDeckPress()} />
+            </Card>
+          </KeyboardAvoidingView>
+        </ThemeProvider>
       </Container>
     );
   }
