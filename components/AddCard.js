@@ -44,7 +44,7 @@ class AddCard extends React.Component {
       Input: {}
     };
     return (
-      <Container>
+      <Container padder style={{ backgroundColor: colors.screensBg }}>
         <ThemeProvider theme={AddCard}>
           <Card style={{ alignSelf: "stretch" }}>
             <Input

@@ -38,7 +38,7 @@ class Home extends React.Component {
     return (
       <Container>
         <ThemeProvider theme={homeScreen}>
-          <Content padder style={{ backgroundColor: colors.allScreensBackgroundColor }}>
+          <Content padder style={{ backgroundColor: colors.screensBg }}>
             {decks &&
               Object.keys(decks).map(id => {
                 

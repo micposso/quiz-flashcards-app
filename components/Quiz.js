@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Animated, Dimensions } from "react-native";
-import { Container, Button, Text, View } from "native-base";
+import { ThemeProvider, Card, Input, Button, Text, Badge } from "react-native-elements";
+import { Container, View } from "native-base";
 import { connect } from "react-redux";
 import { handleDeleteDeck } from "../actions/shared";
 import { clearLocalNotification, setLocalNotification } from "../utils/helper";
@@ -85,15 +86,32 @@ class Quiz extends React.Component {
 
   render() {
     const { questions } = this.props.deck;
+    
+    const Quiz = {
+      Button: {
+        raised: true,
+        type: "outline",
+        containerStyle: { marginTop: 15 }
+      },
+      Card: {
+        containerStyle: {
+          borderColor: "#ccc",
+          borderRadius: 20,
+          height: 200
+        }
+      },
+      Input: {}
+    };
+
     if (this.state.quizCompleted) {
       this.setupNotificaitonForTomorrow();
       return this.renderWhenQuizCompleted();
-    } else if (questions && questions.length) {
-      return this.renderIfQuestionExists(questions);
-    } else {
-      return this.renderIfQuestionDoesNotExists();
-    }
-  }
+      } else if (questions && questions.length) {
+        return this.renderIfQuestionExists(questions);
+      } else {
+        return this.renderIfQuestionDoesNotExists();
+      }
+    };
 
   renderIfQuestionExists(questions) {
     const frontAnimatedStyle = {
@@ -102,78 +120,46 @@ class Quiz extends React.Component {
     const backAnimatedStyle = {
       transform: [{ rotateY: this.backInterpolate }]
     };
+
     const { questionIndex } = this.state;
+
     return (
-      <Container style={styles.container}>
-        <View style={{ marginBottom: 20 }}>
-          <Text style={styles.questionCounterText}>
-            {questionIndex + 1}/{questions.length}
-          </Text>
-        </View>
-        <View style={{ flex: 1 }}>
-          <Animated.View
-            style={[
-              frontAnimatedStyle,
-              styles.questionView,
-              { opacity: this.frontOpacity }
-            ]}
-          >
-            <Text style={styles.questionText}>
-              {questions[questionIndex].question}
-            </Text>
-          </Animated.View>
-          <Animated.View
-            style={[
-              backAnimatedStyle,
-              styles.questionView,
-              styles.backView,
-              { opacity: this.backOpacity }
-            ]}
-          >
-            <Text style={styles.questionText}>
-              {questions[questionIndex].answer}
-            </Text>
-          </Animated.View>
-        </View>
-        <View>
-          <Button
-            style={styles.btn}
-            onPress={() => this.flipCard()}
-            transparent
-            danger
-            block
-          >
-            <Text
-              style={{
-                fontSize: 20,
-                alignSelf: "flex-end",
-                color: colors.darkTextColor
-              }}
+      <Container>
+        <ThemeProvider theme={Quiz}>
+          <Card>
+            <View>
+              <Badge value={questionIndex + 1} />
+              <Text>/</Text>
+              <Badge value={questions.length} />
+            </View>
+            <Animated.View
+              style={[
+                frontAnimatedStyle,
+                styles.questionView,
+                { opacity: this.frontOpacity }
+              ]}
             >
-              {this.state.flipButtonText}
-            </Text>
-          </Button>
-        </View>
-        <View style={{ flex: 1 }}>
-          <Button
-            block
-            rounded
-            style={styles.btnAnswer}
-            onPress={() => this.markQuestion(true)}
-            success
-          >
-            <Text>Correct</Text>
-          </Button>
-          <Button
-            block
-            rounded
-            style={styles.btnAnswer}
-            onPress={() => this.markQuestion(false)}
-            danger
-          >
-            <Text>Incorrect</Text>
-          </Button>
-        </View>
+              <Text style={styles.questionText}>
+                {questions[questionIndex].question}
+              </Text>
+            </Animated.View>
+            <Animated.View
+              style={[
+                backAnimatedStyle,
+                styles.questionView,
+                styles.backView,
+                { opacity: this.backOpacity }
+              ]}
+            >
+              <Text style={styles.questionText}>
+                {questions[questionIndex].answer}
+              </Text>
+            </Animated.View>
+            <Button title={this.state.flipButtonText} onPress={() => this.flipCard()} />
+            <Button title="Correct" onPress={() => this.markQuestion(true)} />
+            <Button title="Incorrect" onPress={() => this.markQuestion(false)} />
+          </Card>
+        </ThemeProvider >
       </Container>
     );
   }
@@ -188,7 +174,7 @@ class Quiz extends React.Component {
               alignSelf: "center",
               marginLeft: 20,
               marginRight: 20,
-              color: colors.darkTextColor
+              color: colors.mainTextColor
             }}
           >
             Sorry, you cannot take a quiz because there are no cards in the
@@ -257,12 +243,12 @@ export default connect(
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.allScreensBackgroundColor
+    backgroundColor: colors.screensBg
   },
   noQuizcontainer: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: colors.allScreensBackgroundColor
+    backgroundColor: colors.screensBg
   },
   questionView: {
     width: Dimensions.get("window").width - 20,

@@ -1,16 +1,34 @@
+import React from "react";
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Navigation from "./Navigation";
 import Deck from "./Deck";
 import AddCard from "./AddCard";
 import Quiz from "./Quiz";
+import { Entypo } from "@expo/vector-icons";
 import { appStyles, colors } from "../utils/Styles";
 
-const Stack = createStackNavigator({
+const Back = ({ onPress }) => (
+  <TouchableHighlight onPress={onPress}>
+    <Entypo name="back" />
+  </TouchableHighlight>
+);
+
+const StackMenu = createStackNavigator({
   Main: {
-    screen: Navigation
+    screen: Navigation,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.primaryBlue
+      }
+    }
   },
   Deck: {
-    screen: Deck
+    screen: Deck,
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: colors.primaryBlue
+      },
+    }
   },
   AddCard: {
     screen: AddCard,
@@ -18,8 +36,8 @@ const Stack = createStackNavigator({
       title: "Add Card",
       headerTintColor: "white",
       headerStyle: {
-        backgroundColor: colors.headerColor
-      }
+        backgroundColor: colors.primaryBlue
+      },
     }
   },
   Quiz: {
@@ -28,10 +46,10 @@ const Stack = createStackNavigator({
       title: "Quiz",
       headerTintColor: "white",
       headerStyle: {
-        backgroundColor: colors.headerColor
-      }
+        backgroundColor: colors.primaryBlue
+      },
     }
   }
 });
 
-export default createAppContainer(Stack);
+export default createAppContainer(StackMenu);

@@ -23,7 +23,7 @@ const TabNavigator = createMaterialBottomTabNavigator(
     }
   },
   {
-    barStyle: { backgroundColor: colors.contentBackgroundColor }
+    barStyle: { backgroundColor: colors.primaryBlue }
   }
 );
 TabNavigator.navigationOptions = {

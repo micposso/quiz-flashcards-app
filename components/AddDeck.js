@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
 import { Container } from "native-base";
-import { ThemeProvider, Card, Input, Button, Text } from "react-native-elements";
+import { ThemeProvider, Card, Input, Button, Text, Badge } from "react-native-elements";
 import { Ionicons } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { handleAddDecks, resetNewDeckId } from "../actions/shared";
@@ -9,10 +9,16 @@ import { appStyles, colors } from "../utils/Styles";
 
 class AddDeck extends React.Component {
   state = {
-    deckTitle: ""
+    deckTitle: "",
+    message: ""
   };
+
   onAddCreateDeckPress() {
-    this.props.addDeck(this.state.deckTitle);
+    if(this.state.deckTitle === "") {
+      this.setState({ message: "Please type a deck name"})
+    } else {
+      this.props.addDeck(this.state.deckTitle);
+    }
   }
 
   handleChange = name => value => {
@@ -45,8 +51,9 @@ class AddDeck extends React.Component {
       },
       Input: {}
     };
+    const { deckTitle, message } = this.state;
     return (
-      <Container>
+      <Container padder style={{ backgroundColor: colors.screensBg }}>
         <ThemeProvider theme={AddDeck}>
           <KeyboardAvoidingView behavior="padding">
             <Card>
@@ -59,12 +66,11 @@ class AddDeck extends React.Component {
                         name="ios-add-circle-outline"
                       />
                     }
-                    value={this.state.deckTitle}
                     onChangeText={this.handleChange("deckTitle")}
                   />
-
                 <Button title="Create Deck" onPress={() => this.onAddCreateDeckPress()} />
             </Card>
+                  <Badge value={message} badgeStyle={{ backgroundColor: colors.screensBg, borderColor: colors.screensBg }}/>
           </KeyboardAvoidingView>
         </ThemeProvider>
       </Container>
@@ -103,7 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 30,
     marginBottom: 30,
-    color: colors.darkTextColor
+    color: colors.mainTextColor
   },
   btn: {
     alignSelf: "center",
@@ -111,7 +117,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: colors.allScreensBackgroundColor,
+    backgroundColor: colors.screensBg,
     alignItems: "center",
     justifyContent: "center"
   }

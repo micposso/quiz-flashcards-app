@@ -16,11 +16,11 @@ export const appStyles = StyleSheet.create({
 });
 
 export const colors = {
-  primaryBlue: '#1678a5',
+  screensBg: '#88a3b9',
+  contentBg: '#0e3ea0',
+  primaryBlue: '#0080c0',
   headerColor: '#000000',
-  darkTextColor: '#000000',
-  allScreensBackgroundColor: '#1678a5',
+  mainTextColor: '#CCCCCC',
   headerColor: '#061a42',
-  contentBackgroundColor: '#0e3ea0',
   cardItem: '#0e3ea0',
 }

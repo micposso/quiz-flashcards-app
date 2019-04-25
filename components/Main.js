@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StatusBar } from "react-native";
 import { Container } from "native-base";
-import Stack from "./StackNavigation";
+import StackMenu from "./StackNavigation";
 import { Constants } from "expo";
 import { connect } from "react-redux";
 import { handleGetAllDecks } from "../actions/shared";
@@ -15,10 +15,10 @@ class Main extends React.Component {
   render() {
     return (
       <Container>
-        <View style={{ height: Constants.statusBarHeight, backgroundColor: colors.allScreensBackgroundColor }}>
+        <View style={{ height: Constants.statusBarHeight, backgroundColor: colors.screensBg }}>
           <StatusBar />
         </View>
-        <Stack />
+        <StackMenu />
       </Container>
     );
   }

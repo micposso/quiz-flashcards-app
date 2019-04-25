@@ -21,7 +21,7 @@ class Fonts extends React.Component {
         felx: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: colors.allScreensBackgroundColor
+        backgroundColor: colors.screensBg
       }}
     >
       <Spinner color="white" />

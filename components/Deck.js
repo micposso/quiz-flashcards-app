@@ -64,11 +64,11 @@ class Deck extends React.Component {
 
     if (deck) {
       return (
-        <Container style={{ padding: 20 }}>
+        <Container padder style={{ backgroundColor: colors.screensBg }}>
           <ThemeProvider theme={DeckScreen}>
             <Card>
               <View style={{ flex: 1, flexDirection: 'row', margin: 5, alignItems: 'center', justifyItems: 'center' }}>
-                <Badge value={numberCards}/><Text h3>{deck.title}</Text>
+                <Badge value={numberCards}/>
               </View>
               <Text>Cards</Text>
               <View style={{ margin: 10 }}>
