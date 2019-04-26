@@ -1,35 +1,16 @@
 import React from "react";
-import { StyleSheet } from "react-native";
-import { Container, Button, Text } from "native-base";
+import {
+  ThemeProvider,
+  Badge,
+  Text,
+  Button,
+  Card
+} from "react-native-elements";
+import { Container, View } from "native-base";
 import { connect } from "react-redux";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { handleDeleteDeck } from "../actions/shared";
-import { colors } from "../utils/colors";
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: colors.allScreensBackgroundColor
-  },
-  deckTitle: {
-    fontSize: 35,
-    fontWeight: "bold",
-    marginBottom: 40
-  },
-  deckCardCount: {
-    fontSize: 30,
-    marginBottom: 40
-  },
-  button: {
-    margin: 20,
-  },
-  alertbtn: {
-    margin: 20,
-    color: 'red',
-    borderStyle: 'solid',
-    borderWidth: 1,
-  }
-});
+import { appStyles, colors } from "../utils/Styles";
 
 class Deck extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -56,8 +37,8 @@ class Deck extends React.Component {
     });
   }
 
-  onDeleteDeckPress(id) {
-    this.props.deleteDeck(id);
+  onRemoveDeck(id) {
+    this.props.removeDeck(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -68,40 +49,69 @@ class Deck extends React.Component {
 
   render() {
     const { deck } = this.props;
+    const numberCards = deck.questions.length;
+    const DeckScreen = {
+      Button: {
+        raised: true,
+        type: "outline",
+        containerStyle: { marginBottom: 10 }
+      },
+      Badge: {
+        status: "warning",
+        badgeStyle: { height: 25, width: 25, marginTop: 40 }
+      },
+      Card: {
+        title: "STUDY DECK",
+        containerStyle: {
+          borderColor: "#ccc",
+          borderRadius: 20,
+        }
+      }
+    };
+
     if (deck) {
       return (
-        <Container style={styles.container}>
-          <Text style={styles.deckTitle}>{deck.title}</Text>
-          <Text style={styles.deckCardCount}>
-            {deck.questions.length} cards
-          </Text>
-          <Button
-            style={[styles.button, { backgroundColor: colors.headerColor }]}
-            onPress={() => this.onAddCardPress(deck.id)}
-            bordered
-            rounded
-            block
-          >
-            <Text>Add Card</Text>
-          </Button>
-          <Button
-            style={[styles.button, { backgroundColor: colors.headerColor }]}
-            onPress={() => this.onStartQuizPress(deck.id)}
-            block
-            rounded
-          >
-            <Text>Start Quiz</Text>
-          </Button>
-          <Button
-            style={styles.alertbtn}
-            onPress={() => this.onDeleteDeckPress(deck.id)}
-            transparent
-            rounded
-            danger
-            block
-          >
-            <Text>Remove Deck</Text>
-          </Button>
+        <Container padder style={{ backgroundColor: colors.screensBg }}>
+          <ThemeProvider theme={DeckScreen}>
+                <View>
+                  <Badge value={numberCards} />
+                </View>
+            <Card>
+
+                <Button
+                  title="Add Card"
+                  onPress={() => this.onAddCardPress(deck.id)}
+                  icon={
+                    <Ionicons
+                      style={appStyles.AppIcons}
+                      name="ios-add-circle-outline"
+                    />
+                  }
+                />
+
+                <Button
+                  title="Start Quiz"
+                  onPress={() => this.onStartQuizPress(deck.id)}
+                  icon={
+                    <MaterialCommunityIcons
+                      style={appStyles.AppIcons}
+                      name="test-tube-empty"
+                    />
+                  }
+                />
+
+                <Button
+                  title="Remove Deck"
+                  onPress={() => this.onRemoveDeck(deck.id)}
+                  icon={
+                    <Ionicons
+                      style={appStyles.AppIcons}
+                      name="ios-remove-circle-outline"
+                    />
+                  }
+                />
+            </Card>
+          </ThemeProvider>
         </Container>
       );
     } else {
@@ -119,7 +129,7 @@ function mapStateToProps({ decks }, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteDeck: deckId => {
+    removeDeck: deckId => {
       dispatch(handleDeleteDeck(deckId));
     }
   };
@@ -129,5 +139,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Deck);
-
-

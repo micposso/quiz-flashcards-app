@@ -1,37 +1,42 @@
+import React from "react";
+import { TouchableHighlight } from 'react-native';
 import { createStackNavigator, createAppContainer } from "react-navigation";
 import Navigation from "./Navigation";
 import Deck from "./Deck";
 import AddCard from "./AddCard";
 import Quiz from "./Quiz";
-import { colors } from "../utils/colors";
+import { AntDesign } from "@expo/vector-icons";
+import { appStyles, colors } from "../utils/Styles";
 
-const Stack = createStackNavigator({
-  Main: {
-    screen: Navigation
-  },
-  Deck: {
-    screen: Deck
-  },
-  AddCard: {
-    screen: AddCard,
-    navigationOptions: {
-      title: "Add Card",
-      headerTintColor: "white",
-      headerStyle: {
-        backgroundColor: colors.headerColor
-      }
+const Back = ({ onPress }) => (
+  <TouchableHighlight onPress={onPress}>
+    <AntDesign name="leftcircle" color="white" size={30} style={{ marginLeft: 20 }} />
+  </TouchableHighlight>
+);
+
+const StackMenu = createStackNavigator(
+  {
+    Main: {
+      screen: Navigation
+    },
+    Deck: {
+      screen: Deck
+    },
+    AddCard: {
+      screen: AddCard
+    },
+    Quiz: {
+      screen: Quiz
     }
   },
-  Quiz: {
-    screen: Quiz,
-    navigationOptions: {
-      title: "Quiz",
+  {
+    defaultNavigationOptions: {
       headerTintColor: "white",
       headerStyle: {
-        backgroundColor: colors.headerColor
+        backgroundColor: colors.primaryBlue
       }
     }
   }
-});
+);
 
-export default createAppContainer(Stack);
+export default createAppContainer(StackMenu);

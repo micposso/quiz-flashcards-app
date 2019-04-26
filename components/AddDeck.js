@@ -1,16 +1,24 @@
 import React from "react";
 import { StyleSheet, View, KeyboardAvoidingView } from "react-native";
-import { Container, Button, Text, Item, Input, Form } from "native-base";
+import { Container } from "native-base";
+import { ThemeProvider, Card, Input, Button, Text, Badge } from "react-native-elements";
+import { Ionicons } from "@expo/vector-icons";
 import { connect } from "react-redux";
 import { handleAddDecks, resetNewDeckId } from "../actions/shared";
-import { colors } from "../utils/colors";
+import { appStyles, colors } from "../utils/Styles";
 
 class AddDeck extends React.Component {
   state = {
-    deckTitle: ""
+    deckTitle: "",
+    message: ""
   };
+
   onAddCreateDeckPress() {
-    this.props.addDeck(this.state.deckTitle);
+    if(this.state.deckTitle === "") {
+      this.setState({ message: "Please type a deck name"})
+    } else {
+      this.props.addDeck(this.state.deckTitle);
+    }
   }
 
   handleChange = name => value => {
@@ -28,40 +36,43 @@ class AddDeck extends React.Component {
   }
 
   render() {
+    const AddDeck = {
+      Button: {
+        raised: true,
+        type: "outline",
+        containerStyle: { marginTop: 15 }
+      },
+      Card: {
+        containerStyle: {
+          borderColor: "#ccc",
+          borderRadius: 20,
+          height: 200
+        }
+      },
+      Input: {}
+    };
+    const { deckTitle, message } = this.state;
     return (
-      <Container style={styles.container}>
-        <KeyboardAvoidingView behavior="padding">
-          <Text style={[styles.selfAlign, styles.text1]}>
-            What is the title of your new deck?
-          </Text>
-          <Form style={{ alignSelf: "stretch" }}>
-            <Item style={{ backgroundColor: "white" }}>
-              <Input
-                placeholder="Deck Title"
-                value={this.state.deckTitle}
-                onChangeText={this.handleChange("deckTitle")}
-              />
-            </Item>
-          </Form>
-
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              alignSelf: "stretch",
-              justifyContent: "center"
-            }}
-            full
-          >
-            <Button
-              rounded
-              style={[styles.btn]}
-              onPress={() => this.onAddCreateDeckPress()}
-            >
-              <Text>Create Deck</Text>
-            </Button>
-          </View>
-        </KeyboardAvoidingView>
+      <Container padder style={{ backgroundColor: colors.screensBg }}>
+        <ThemeProvider theme={AddDeck}>
+          <KeyboardAvoidingView behavior="padding">
+            <Card>
+              <Text h3>What is the title of your new deck?</Text>
+                  <Input
+                    placeholder="Deck Title"
+                    leftIcon={
+                      <Ionicons
+                        style={appStyles.AppIcons}
+                        name="ios-add-circle-outline"
+                      />
+                    }
+                    onChangeText={this.handleChange("deckTitle")}
+                  />
+                <Button title="Create Deck" onPress={() => this.onAddCreateDeckPress()} />
+            </Card>
+                  <Badge value={message} badgeStyle={{ backgroundColor: colors.screensBg, borderColor: colors.screensBg }}/>
+          </KeyboardAvoidingView>
+        </ThemeProvider>
       </Container>
     );
   }
@@ -98,7 +109,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginTop: 30,
     marginBottom: 30,
-    color: colors.darkTextColor
+    color: colors.mainTextColor
   },
   btn: {
     alignSelf: "center",
@@ -106,7 +117,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: colors.allScreensBackgroundColor,
+    backgroundColor: colors.screensBg,
     alignItems: "center",
     justifyContent: "center"
   }
