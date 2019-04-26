@@ -32,7 +32,6 @@ const StackMenu = createStackNavigator(
   {
     defaultNavigationOptions: {
       headerTintColor: "white",
-      headerLeft: <Back />,
       headerStyle: {
         backgroundColor: colors.primaryBlue
       }

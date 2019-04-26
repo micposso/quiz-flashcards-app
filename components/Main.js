@@ -15,7 +15,7 @@ class Main extends React.Component {
   render() {
     return (
       <Container>
-        <View style={{ height: Constants.statusBarHeight, backgroundColor: colors.screensBg }}>
+        <View style={{ height: Constants.statusBarHeight }}>
           <StatusBar />
         </View>
         <StackMenu />

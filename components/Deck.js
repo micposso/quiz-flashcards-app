@@ -37,8 +37,8 @@ class Deck extends React.Component {
     });
   }
 
-  onDeleteDeckPress(id) {
-    this.props.deleteDeck(id);
+  onRemoveDeck(id) {
+    this.props.removeDeck(id);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -102,7 +102,7 @@ class Deck extends React.Component {
 
                 <Button
                   title="Remove Deck"
-                  onPress={() => this.onDeleteDeckPress(deck.id)}
+                  onPress={() => this.onRemoveDeck(deck.id)}
                   icon={
                     <Ionicons
                       style={appStyles.AppIcons}
@@ -129,7 +129,7 @@ function mapStateToProps({ decks }, props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteDeck: deckId => {
+    removeDeck: deckId => {
       dispatch(handleDeleteDeck(deckId));
     }
   };
