@@ -34,7 +34,7 @@ const StackMenu = createStackNavigator(
       headerTintColor: "white",
       headerLeft: <Back />,
       headerStyle: {
-        backgroundColor: colors.headerColor
+        backgroundColor: colors.primaryBlue
       }
     }
   }

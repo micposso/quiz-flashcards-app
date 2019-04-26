@@ -19,7 +19,9 @@ const QuizScreen = {
       borderRadius: 20,
     }
   },
-  Input: {}
+  Badge: {
+    badgeStyle: { height: 25, width: 25 }
+  }
 };
 
 class Quiz extends React.Component {
@@ -27,8 +29,9 @@ class Quiz extends React.Component {
     questionIndex: 0,
     correctCount: 0,
     quizCompleted: false,
-    flipButtonText: "Show Answer"
+    flipButtonText: "Display Answer"
   };
+
   componentWillMount() {
     this.animatedValue = new Animated.Value(0);
     this.value = 0;
@@ -126,10 +129,10 @@ class Quiz extends React.Component {
       <Container>
         <ThemeProvider theme={QuizScreen}>
           <Card>
-            <View>
-              <Badge value={questionIndex + 1} />
-              <Text>/</Text>
-              <Badge value={questions.length} />
+            <View styles={appStyles.centerAlign}>
+                <Badge value={questionIndex + 1} />
+                <Text h4>/</Text>
+                <Badge value={questions.length} />
             </View>
             <Card>
               <Animated.View

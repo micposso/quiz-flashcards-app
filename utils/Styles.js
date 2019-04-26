@@ -11,6 +11,12 @@ export const appStyles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: '#1678a5'
+    },
+    centerAlign: {
+      flex: 1, 
+      flexDirection: 'row',
+      alignItems: 'center', 
+      justifyContent: 'center'
     }
 
 });
